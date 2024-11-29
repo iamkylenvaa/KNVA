@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+
+    <div id="login-section" class="login-container">
+        <h1>Login</h1>
+        <form onsubmit="return validateLogin()">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="error-message"></p>
+    </div>
+
+
+    <div id="dashboard-section" class="dashboard-container hidden">
+
+        <aside class="sidebar">
+            <h2>Portfolio</h2>
+            <ul>
+                <li><a href="#" onclick="navigateTo('hero')">Home</a></li>
+                <li><a href="#" onclick="navigateTo('about-section')">About Me</a></li>
+                <li><a href="#" onclick="navigateTo('services-section')">Services</a></li>
+            </ul>
+        </aside>
+
+        <main>
+   
+            <header id="hero" class="hero">
+                <h1>Welcome to My Portfolio</h1>
+                <p>Discover my work and creativity!</p>
+            </header>
+
+          
+            <section id="about-section">
+                <h2>About Me</h2>
+                <p>Kyle Nieva, Founder and CEO of KNVA Creatives, is a Bachelor of Science in Multimedia Arts student at FEU Institute of Technology with a dedication to creating engaging, visually captivating content for individuals and businesses. His portfolio showcases a broad range of expertise, from films and music videos to photography and other digital media projects, each designed to reflect and elevate clients' unique visions. 
+
+                </p>
+            </section>
+
+  
+            <section id="services-section">
+                <h2>My Services/Portfolio</h2>
+                <article>
+                    <h3>Photography</h3>
+                    <br>
+                    <h3>EVENTS</h3>
+                    <div class="carousel-container">
+                     <div class="carousel">
+                    
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\events\EVENT1.jpg">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\events\EVENT2.jpg">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\events\EVENT3.jpg">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\events\EVENT4.jpg">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\events\EVENT5.jpg">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\events\EVENT6.jpg">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\events\EVENT7.jpg">
+                    </div>
+                    <button class="prev" onclick="prevSlide(this)">&#10094;</button>
+                    <button class="next" onclick="nextSlide(this)">&#10095;</button>
+                </div>
+                    <h3>PORTRAITS</h3>
+                    <div class="carousel-container">
+                     <div class="carousel">
+                    
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT1.jpg">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT2.jpg">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT3.png">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT4.png">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT5.png">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT6.png">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT7.png">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT8.png">
+                    <img src="C:\Users\Niño Emmanuel\Downloads\Images\portrait\PORTRAIT9.png">
+                    </div>
+                    <button class="prev" onclick="prevSlide(this)">&#10094;</button>
+                    <button class="next" onclick="nextSlide(this)">&#10095;</button>
+                </div>
+                <h3>PROMOTIONAL</h3>
+                <div class="carousel-container">
+                 <div class="carousel">
+                
+                <img src="C:\Users\Niño Emmanuel\Downloads\Images\promotional\PROMOTIONAL1.png">
+                <img src="C:\Users\Niño Emmanuel\Downloads\Images\promotional\PROMOTIONAL2.png">
+                <img src="C:\Users\Niño Emmanuel\Downloads\Images\promotional\PROMOTIONAL3.png">
+                <img src="C:\Users\Niño Emmanuel\Downloads\Images\promotional\PROMOTIONAL4.png">
+                <img src="C:\Users\Niño Emmanuel\Downloads\Images\promotional\PROMOTIONAL5.png">
+                <img src="C:\Users\Niño Emmanuel\Downloads\Images\promotional\PROMOTIONAL6.png">
+            
+                </div>
+                <button class="prev" onclick="prevSlide(this)">&#10094;</button>
+                <button class="next" onclick="nextSlide(this)">&#10095;</button>
+            </div>
+            <h3>KNVA Creatives Team</h3>
+            <div class="carousel-container">
+             <div class="carousel">
+            
+            <img src="C:\Users\Niño Emmanuel\Downloads\Images\team\CREATIVES1.jpg">
+            <img src="C:\Users\Niño Emmanuel\Downloads\Images\team\CREATIVES2.jpg">
+            </div>
+            <button class="prev" onclick="prevSlide(this)">&#10094;</button>
+            <button class="next" onclick="nextSlide(this)">&#10095;</button>
+        </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script>
+
+function validateLogin() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === "knva" && password === "1234") {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('dashboard-section').classList.remove('hidden');
+        return false; 
+    } else {
+        document.getElementById('error-message').textContent = "Invalid username or password!";
+        return false; 
+    }
+}
+
+function navigateTo(sectionId) {
+    document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+}
+
+function showSlide(carousel, index) {
+    const slides = carousel.querySelectorAll("img");
+    const totalSlides = slides.length;
+    index = (index + totalSlides) % totalSlides;
+    carousel.style.transform = `translateX(-${index * 100}%)`;
+    return index;
+}
+
+function prevSlide(button) {
+    const carousel = button.closest(".carousel-container").querySelector(".carousel");
+    const currentIndex = Number(carousel.dataset.index || 0);
+    carousel.dataset.index = showSlide(carousel, currentIndex - 1);
+}
+
+function nextSlide(button) {
+    const carousel = button.closest(".carousel-container").querySelector(".carousel");
+    const currentIndex = Number(carousel.dataset.index || 0);
+    carousel.dataset.index = showSlide(carousel, currentIndex + 1);
+}
+
+    </script>
+</body>
+</html>
